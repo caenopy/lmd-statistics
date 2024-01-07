@@ -9,7 +9,7 @@ import json
 def beat_accuracy(pm, eps=0.001):
     # Use notes in first instrument to measure how well beats line up with note onsets
     
-    if len(pm.instruments[0]) == 0:
+    if (len(pm.instruments) == 0) or (len(pm.instruments[0].notes) == 0):
         return -1, -1
 
     note_onsets = []

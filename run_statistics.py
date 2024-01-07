@@ -4,7 +4,8 @@ import joblib
 import glob
 import os
 from math import isclose
-import json
+import pickle
+from tqdm import tqdm
 
 def beat_accuracy(pm, eps=0.001):
     # Use notes in first instrument to measure how well beats line up with note onsets
@@ -88,15 +89,17 @@ def compute_statistics(midi_file):
 # We do things in parallel because there are tons so it would otherwise take too long!
 statistics = joblib.Parallel(n_jobs=16, verbose=0)(
     joblib.delayed(compute_statistics)(midi_file)
-    for midi_file in glob.glob(os.path.join('data', 'lmd_full', '*', '*.mid')))
+    for midi_file in tqdm(glob.glob(os.path.join('data', 'lmd_full', '*', '*.mid')))
+)
+
 # When an error occurred, None will be returned; filter those out.
 statistics = [s for s in statistics if s is not None]
 
-# Convert statistics to JSON string
-statistics_json = json.dumps(statistics)
+# Convert statistics to a binary string using pickle
+statistics_pickle = pickle.dumps(statistics)
 
-output_file = 'statistics.json'
+output_file = 'statistics.pkl'
 
-# Write the JSON string to the file
-with open(output_file, 'w') as file:
-    file.write(statistics_json)
+# Write the pickle string to the file
+with open(output_file, 'wb') as file:
+    file.write(statistics_pickle)

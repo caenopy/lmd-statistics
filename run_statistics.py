@@ -21,6 +21,10 @@ def beat_accuracy(pm, eps=0.001):
     onbeats = []
 
     for beat in pm.get_beats():
+
+        if beat > 10000:
+            break
+        
         region_start = beat - eps
         region_end = beat + eps
 

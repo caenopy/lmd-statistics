@@ -24,7 +24,7 @@ def beat_accuracy(pm, eps=0.001):
 
         if beat > 10000:
             break
-        
+
         region_start = beat - eps
         region_end = beat + eps
 
@@ -86,7 +86,7 @@ def compute_statistics(midi_file):
 
 # Compute statistics about every file in our collection in parallel using joblib
 # We do things in parallel because there are tons so it would otherwise take too long!
-statistics = joblib.Parallel(n_jobs=10, verbose=0)(
+statistics = joblib.Parallel(n_jobs=16, verbose=0)(
     joblib.delayed(compute_statistics)(midi_file)
     for midi_file in glob.glob(os.path.join('data', 'lmd_full', '*', '*.mid')))
 # When an error occurred, None will be returned; filter those out.

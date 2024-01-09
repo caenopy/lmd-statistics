@@ -38,8 +38,8 @@ def plot_hist(data, bins, xlabel=None, ylabel=None, divisor=1000):
 
 
 def uniform_hist(heights, bins, ax, **kwargs):
-    ax.bar(left=np.arange(len(bins) - 1) - .5, height=heights,
-           width=1, bottom=0, **kwargs)
+    ax.bar(x=np.arange(len(bins) - 1), height=heights,
+           width=1, align='edge', **kwargs)
 
 
 def pretty_hist(heights, bins, ax=None, title=None):

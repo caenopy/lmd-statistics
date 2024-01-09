@@ -1,4 +1,6 @@
-# midi-ground-truth
+# lmd-statistics
+
+A few additions to craffel's midi-ground-truth. Original README reproduced below:
 
 This repository contains the code and data for the paper ["Extracting Ground Truth Information from MIDI Files: A MIDIfesto"](http://colinraffel.com/publications/ismir2016extracting.pdf).
 All of the experiments are contained within the IPython notebooks, and the data lives in the `data` directory.
